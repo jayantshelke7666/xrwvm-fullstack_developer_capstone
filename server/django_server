@@ -1,0 +1,141 @@
+Watching for file changes with StatReloader
+[24/Oct/2026 23:01:36] "GET /admin/ HTTP/1.1" 302 0
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 16, in cached_import
+    return getattr(module, class_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'django.contrib.messages.context_processors' has no attribute 'request'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\core\handlers\base.py", line 222, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\base.py", line 172, in render
+    with context.bind_template(self):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\context.py", line 260, in bind_template
+    processors = template.engine.template_context_processors + self._processors
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\engine.py", line 118, in template_context_processors
+    return tuple(import_string(path) for path in context_processors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\engine.py", line 118, in <genexpr>
+    return tuple(import_string(path) for path in context_processors)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 32, in import_string
+    raise ImportError(
+ImportError: Module "django.contrib.messages.context_processors" does not define a "request" attribute/class
+[24/Oct/2026 23:01:36] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 129535
+Not Found: /favicon.ico
+[24/Oct/2026 23:01:37] "GET /favicon.ico HTTP/1.1" 404 4035
+C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\djangoproj\settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 24, 2026 - 22:56:58
+Django version 6.1.2, using settings 'djangoproj.settings'
+Starting WSGI development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/6.1/howto/deployment/
+Watching for file changes with StatReloader
+[24/Oct/2026 23:02:11] "GET /admin/ HTTP/1.1" 302 0
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 16, in cached_import
+    return getattr(module, class_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'django.contrib.messages.context_processors' has no attribute 'debug'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\core\handlers\base.py", line 222, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\base.py", line 172, in render
+    with context.bind_template(self):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\context.py", line 260, in bind_template
+    processors = template.engine.template_context_processors + self._processors
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\engine.py", line 118, in template_context_processors
+    return tuple(import_string(path) for path in context_processors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\template\engine.py", line 118, in <genexpr>
+    return tuple(import_string(path) for path in context_processors)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\.python_packages\django\utils\module_loading.py", line 32, in import_string
+    raise ImportError(
+ImportError: Module "django.contrib.messages.context_processors" does not define a "debug" attribute/class
+[24/Oct/2026 23:02:11] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 129686
+C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\djangoproj\settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 24, 2026 - 23:01:47
+Django version 6.1.2, using settings 'djangoproj.settings'
+Starting WSGI development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/6.1/howto/deployment/
+Watching for file changes with StatReloader
+C:\Users\shelk\Documents\Codex\2026-10-24\g\car-dealership-capstone\server\djangoapp\views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 24, 2026 - 23:02:21
+Django version 6.1.2, using settings 'djangoproj.settings'
+Starting WSGI development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/6.1/howto/deployment/
+Watching for file changes with StatReloader

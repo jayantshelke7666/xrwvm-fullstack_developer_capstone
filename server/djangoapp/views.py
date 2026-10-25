@@ -1,65 +1,88 @@
-# Uncomment the required imports before adding the code
-
-# from django.shortcuts import render
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.contrib.auth.models import User
-# from django.shortcuts import get_object_or_404, render, redirect
-# from django.contrib.auth import logout
-# from django.contrib import messages
-# from datetime import datetime
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.contrib.auth import login, authenticate
-import logging
-import json
 from django.views.decorators.csrf import csrf_exempt
-# from .populate import initiate
+from .models import CarMake, CarModel
+from . import restapis
+import json
 
 
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
+def _body(request):
+    try:
+        return json.loads(request.body or b'{}')
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return {}
 
 
-# Create your views here.
-
-# Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
-    # Get username and password from request.POST dictionary
-    data = json.loads(request.body)
-    username = data['userName']
-    password = data['password']
-    # Try to check if provide credential can be authenticated
-    user = authenticate(username=username, password=password)
-    data = {"userName": username}
-    if user is not None:
-        # If user is valid, call login method to login current user
-        login(request, user)
-        data = {"userName": username, "status": "Authenticated"}
-    return JsonResponse(data)
+    data = _body(request)
+    username = data.get('userName') or data.get('username') or request.POST.get('username', '')
+    password = data.get('password') or request.POST.get('password', '')
+    user = authenticate(request, username=username, password=password)
+    if user is None:
+        return JsonResponse({'userName': username, 'status': 'Invalid credentials'}, status=401)
+    login(request, user)
+    return JsonResponse({'userName': username, 'firstName': user.first_name, 'lastName': user.last_name, 'status': 'Authenticated'})
 
-# Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
 
-# Create a `registration` view to handle sign up request
-# @csrf_exempt
-# def registration(request):
-# ...
+def logout_user(request):
+    logout(request)
+    return JsonResponse({'userName': ''})
 
-# # Update the `get_dealerships` view to render the index page with
-# a list of dealerships
-# def get_dealerships(request):
-# ...
 
-# Create a `get_dealer_reviews` view to render the reviews of a dealer
-# def get_dealer_reviews(request,dealer_id):
-# ...
+@csrf_exempt
+def registration(request):
+    data = _body(request)
+    username = data.get('userName') or data.get('username')
+    password = data.get('password')
+    if not username or not password:
+        return JsonResponse({'status': 'Username and password are required'}, status=400)
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'status': 'Username already exists'}, status=409)
+    user = User.objects.create_user(username=username, password=password, first_name=data.get('firstName', ''), last_name=data.get('lastName', ''), email=data.get('email', ''))
+    return JsonResponse({'status': 'Registered', 'userName': user.username}, status=201)
 
-# Create a `get_dealer_details` view to render the dealer details
-# def get_dealer_details(request, dealer_id):
-# ...
 
-# Create a `add_review` view to submit a review
-# def add_review(request):
-# ...
+def get_dealerships(request):
+    return JsonResponse({'status': 200, 'dealers': restapis.get_request('fetchDealers')})
+
+
+def get_dealerships_by_state(request, state):
+    return JsonResponse({'status': 200, 'dealers': restapis.get_request(f'fetchDealers/{state}')})
+
+
+def get_dealer_reviews(request, dealer_id):
+    reviews = restapis.get_request(f'fetchReviews/dealer/{dealer_id}')
+    for review in reviews:
+        review['sentiment'] = restapis.analyze_review_sentiments(review.get('review', ''))
+    return JsonResponse({'status': 200, 'reviews': reviews})
+
+
+def get_dealer_details(request, dealer_id):
+    return JsonResponse({'status': 200, 'dealer': restapis.get_request(f'fetchDealer/{dealer_id}')})
+
+
+@csrf_exempt
+def add_review(request):
+    if request.method != 'POST':
+        return JsonResponse({'status': 'POST required'}, status=405)
+    data = _body(request)
+    required = ('name', 'dealership', 'review', 'purchase_date', 'car_make', 'car_model', 'car_year')
+    if any(not data.get(key) for key in required):
+        return JsonResponse({'status': 'All review fields are required'}, status=400)
+    data['car_year'] = int(data['car_year'])
+    data.setdefault('purchase', True)
+    restapis.post_review(data)
+    return JsonResponse({'status': 200, 'message': 'Review submitted'})
+
+
+def get_cars(request):
+    rows = [{'CarMake': model.car_make.name, 'CarModel': model.name, 'CarYear': model.year} for model in CarModel.objects.select_related('car_make').all().order_by('car_make__name', 'name')]
+    return JsonResponse({'CarModels': rows})
+
+
+def get_all_car_makes(request):
+    rows = [{'id': make.id, 'name': make.name, 'description': make.description} for make in CarMake.objects.all().order_by('name')]
+    return JsonResponse({'CarMakes': rows})
+

@@ -1,11 +1,14 @@
-import LoginPanel from "./components/Login/Login"
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Dealers from './components/Dealers/Dealers';
+import Dealer from './components/Dealers/Dealer';
+import PostReview from './components/Dealers/PostReview';
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<LoginPanel />} />
-    </Routes>
-  );
-}
+function Landing() { return <><Header/><main className="container py-5 text-center"><img src="/static/car_dealership.jpg" className="img-fluid rounded" style={{maxHeight:'420px',objectFit:'cover'}} alt="Cars at our dealerships"/><h1 className="mt-4">Find a dealership you can trust</h1><p className="lead">Explore our branches and hear from real customers.</p><a className="btn btn-info btn-lg" href="/dealers">View Dealerships</a></main></>; }
+function About() { return <><Header/><main className="container py-5"><h1>About our team</h1><p className="lead">We help drivers find a dealership they can trust, with clear information and honest customer reviews.</p><div className="row g-4"><article className="col-md-4"><img className="img-fluid rounded" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" alt="Team collaborating"/><h2 className="h4 mt-3">Maya Patel</h2><p>Customer Experience Director · maya.patel@example.com</p></article><article className="col-md-4"><img className="img-fluid rounded" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80" alt="Operations manager"/><h2 className="h4 mt-3">Jordan Lee</h2><p>Regional Operations Manager · jordan.lee@example.com</p></article><article className="col-md-4"><img className="img-fluid rounded" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=80" alt="Customer relations lead"/><h2 className="h4 mt-3">Avery Brooks</h2><p>Community & Reviews Lead · avery.brooks@example.com</p></article></div></main></>; }
+function Contact() { return <><Header/><main className="container py-5"><h1>Contact our team</h1><p className="lead">Customer support: <a href="mailto:support@carsdealership.example">support@carsdealership.example</a> · <a href="tel:+18005550142">+1 (800) 555-0142</a></p><p>Office: 100 Market Street, Kansas City, MO 64106, United States. Monday–Friday, 8:00 a.m.–6:00 p.m. Central Time.</p><img className="img-fluid rounded" src="/static/contactus.png" alt="Contact our support team"/></main></>; }
+function App() { return <Routes><Route path="/" element={<Landing/>}/><Route path="/about" element={<About/>}/><Route path="/contact" element={<Contact/>}/><Route path="/login" element={<Login/>}/><Route path="/register" element={<Register/>}/><Route path="/dealers" element={<Dealers/>}/><Route path="/dealer/:id" element={<Dealer/>}/><Route path="/postreview/:id" element={<PostReview/>}/></Routes>; }
 export default App;

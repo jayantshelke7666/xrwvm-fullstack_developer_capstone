@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+__pycache__/
+*.py[cod]
+server/.python_packages/
+server/db.sqlite3
+server/collected_static/
+server/frontend/node_modules/
+server/frontend/build/
+server/database/node_modules/
+server/database/data/reviews.json.bak
+work/
+submission_evidence/
